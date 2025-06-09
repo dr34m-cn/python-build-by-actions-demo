@@ -188,13 +188,13 @@ jobs:
     steps:
       - name: 判断平台
         run: |
-          os=${{ matrix.os }}
-          if [ "$os" = "windows-latest" ]; then
-            PLATFORM="amd64"
-          else
-            PLATFORM="arm64"
-          fi
-          echo "PLATFORM=$PLATFORM" >> $GITHUB_ENV
+          $os = "${{ matrix.os }}"
+          if ($os -eq "windows-latest") {
+            $PLATFORM = "amd64"
+          } else {
+            $PLATFORM = "arm64"
+          }
+          "PLATFORM=$PLATFORM" | Out-File -FilePath $env:GITHUB_ENV -Append -Encoding utf8
 
       - name: 检出仓库代码
         uses: actions/checkout@v4
